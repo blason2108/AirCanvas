@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Canvas — Gesture Drawing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Air Canvas</h1>
+            <p>Draw with your finger — <span>Index finger</span> to draw, <span>two fingers</span> to toggle</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="video-container">
+                <img id="videoFeed" src="{{ url_for('video_feed') }}" alt="Video Feed">
+                <div class="status-bar">
+                    <span id="toolStatus">Tool: Pen</span>
+                    <span id="gestureStatus">Gesture: Idle</span>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <label>Drawing Tools</label>
+                    <div class="tool-buttons">
+                        <button class="tool-btn active" data-tool="pen" title="Pen">✏️</button>
+                        <button class="tool-btn" data-tool="eraser" title="Eraser">🧹</button>
+                        <button class="tool-btn" data-tool="line" title="Line">📏</button>
+                        <button class="tool-btn" data-tool="circle" title="Circle">⭕</button>
+                        <button class="tool-btn" data-tool="rectangle" title="Rectangle">⬜</button>
+                        <button class="tool-btn" data-tool="spray" title="Spray">✨</button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Color Palette</label>
+                    <div class="color-presets">
+                        <button class="color-btn" data-color="#FFFFFF" style="background:#FFFFFF"></button>
+                        <button class="color-btn" data-color="#FF6B6B" style="background:#FF6B6B"></button>
+                        <button class="color-btn" data-color="#FFA94D" style="background:#FFA94D"></button>
+                        <button class="color-btn" data-color="#FFD43B" style="background:#FFD43B"></button>
+                        <button class="color-btn" data-color="#69DB7C" style="background:#69DB7C"></button>
+                        <button class="color-btn" data-color="#74C0FC" style="background:#74C0FC"></button>
+                        <button class="color-btn" data-color="#FF85A2" style="background:#FF85A2"></button>
+                        <button class="color-btn" data-color="#000000" style="background:#000000"></button>
+                    </div>
+                    <input type="color" id="customColor" value="#FF6B6B">
+                </div>
+                
+                <div class="control-group">
+                    <label>Brush Size</label>
+                    <input type="range" id="brushSize" min="1" max="50" value="5">
+                    <div class="brush-preview">
+                        <span id="sizeValue">5</span>px
+                    </div>
+                </div>
+
+                <div class="gradient-divider"></div>
+                
+                <div class="actions">
+                    <button id="undoBtn" class="action-btn">↩ Undo</button>
+                    <button id="redoBtn" class="action-btn">↪ Redo</button>
+                    <button id="clearBtn" class="action-btn danger">✕ Clear</button>
+                    <button id="exportBtn" class="action-btn">⬇ Export</button>
+                </div>
+
+                <div class="gradient-divider"></div>
+
+                <div class="instructions">
+                    <h3>Quick Guide</h3>
+                    <ul>
+                        <li>✋ Show hand to camera</li>
+                        <li>☝️ Point → Draw</li>
+                        <li>✌️ Two fingers → Toggle tool</li>
+                        <li>✊ Close fist → Stop</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
